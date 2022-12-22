@@ -1,0 +1,47 @@
+{% extends 'todo_app/base.html' %}
+
+
+{% block content %}
+<div>
+    <div>
+        <div>
+            <h3>Edit list:</h3>
+            <h5>{{ list.title | upper }}</h5>
+        </div>
+        <ul>
+            {% for item in object_list %}
+            <li>
+                <div>
+                    <div
+                        role="button"
+                        onclick="location.href='#'">
+                        {{ item.title }}
+                        (Due {{ item.due_date | date:"l, F j" }})
+                    </div>
+                </div>
+            </li>
+            {% empty %}
+            <p>There are no to-do items in this list.</p>
+            {% endfor %}
+        </ul>
+        
+            <div class="row">
+                <p style="display: inline;">
+                    <input
+                        value="Add a new item"
+                        type="button"
+                        onclick="location.href=' {% url 'todo_app:create-Item' list.id %}'" />
+                </p>
+                <p style="display: inline;">
+                    <input
+                        value="Delete this list"
+                        type="button"
+                        onclick="location.href=' {% url 'todo_app:delete-list' list.id %}'" />
+                </p>
+            </div>
+            
+        
+        
+    </div>
+</div>
+{% endblock %}
